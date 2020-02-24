@@ -780,7 +780,7 @@ int kbase_mem_copy_from_extres(struct kbase_context *kctx,
 		for (i = 0; i < dma_to_copy/PAGE_SIZE &&
 				target_page_nr < buf_data->nr_pages; i++) {
 
-			void *extres_page = dma_buf_kmap(dma_buf, i);
+			void *extres_page = NULL; //dma_buf_kmap(dma_buf, i);
 
 			if (extres_page) {
 				ret = kbase_mem_copy_to_pinned_user_pages(
@@ -788,7 +788,7 @@ int kbase_mem_copy_from_extres(struct kbase_context *kctx,
 						buf_data->nr_pages,
 						&target_page_nr, offset);
 
-				dma_buf_kunmap(dma_buf, i, extres_page);
+				//dma_buf_kunmap(dma_buf, i, extres_page);
 				if (ret)
 					goto out_unlock;
 			}
